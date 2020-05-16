@@ -1,23 +1,5 @@
-
-<h1>All Works</h1>
-
-<ul class="list-group top-ten__list">
-<% @works.each do |work| %>
-    <li class="list-group-item">
-        <h4>
-          <a href="/"> <%= work.title %> </a>
-          <small class="top-ten__creator">by <%= work.creator %> </small>
-        </h4>
-        <p>votes here</p>
-      </li>
-<% end %>
-</ul>
-
-
-<br>
-<br>
 <main>
-    <h2>TEMPLATE:::List of Works</h2>
+    <h2>List of Works</h2>
 
   <section class="media-table">
     <h4>Albums</h4>
@@ -32,13 +14,15 @@
         </tr>
       </thead>
       <tbody>
+      <% Work.where(category: :album).find_each do |work| %>
           <tr>
-            <td>10</td>
-            <td><a href="/works/571">Kreb-Full-o Been ! </a></td>
-            <td>Ms. Trevion Buckridge</td>
-            <td>2016</td>
-            <td><a class="btn btn-primary" rel="nofollow" data-method="post" href="/works/571/upvote">Upvote</a></td>
+            <td> <%= work.votes.count%> </td>
+            <td> <%= link_to work.title, work_path(work.id) %> </td>
+            <td> <%= work.creator %> </td>
+            <td> <%= work.publication_year %> </td>
+            <td> <%= link_to 'Upvote', work_upvote_path(work.id), method: :post, class: "btn btn-primary" %> </td>
           </tr>
+      <% end %>
       </tbody>
     </table>
   </section>
@@ -56,16 +40,19 @@
         </tr>
       </thead>
       <tbody>
+      <% Work.where(category: :book).find_each do |work| %>
           <tr>
-            <td>5</td>
-            <td><a href="/works/592">Huggy Star</a></td>
-            <td>Nigel Lesch DVM -0</td>
-            <td>1962</td>
-            <td><a class="btn btn-primary" rel="nofollow" data-method="post" href="/works/592/upvote">Upvote</a></td>
+            <td> <%= work.votes.count%> </td>
+            <td> <%= link_to work.title, work_path(work.id) %> </td>
+            <td> <%= work.creator %> </td>
+            <td> <%= work.publication_year %> </td>
+            <td> <%= link_to 'Upvote', work_upvote_path(work.id), method: :post, class: "btn btn-primary" %> </td>
           </tr>
+      <% end %>
       </tbody>
     </table>
   </section>
+
   <section class="media-table">
     <h4>Movies</h4>
     <table class="table">
@@ -79,18 +66,20 @@
         </tr>
       </thead>
       <tbody>
+      <% Work.where(category: :movie).find_each do |work| %>
           <tr>
-            <td>27</td>
-            <td><a href="/works/596">your name.</a></td>
-            <td>Makoto Shinkai</td>
-            <td>2016</td>
-            <td><a class="btn btn-primary" rel="nofollow" data-method="post" href="/works/596/upvote">Upvote</a></td>
+            <td> <%= work.votes.count%> </td>
+            <td> <%= link_to work.title, work_path(work.id) %> </td>
+            <td> <%= work.creator %> </td>
+            <td> <%= work.publication_year %> </td>
+            <td> <%= link_to 'Upvote', work_upvote_path(work.id), method: :post, class: "btn btn-primary" %> </td>
           </tr>
+      <% end %>
       </tbody>
     </table>
   </section>
 
-<a class="btn btn-secondary" href="/">View top media</a>
-<a class="btn btn-primary" href="/works/new">Add a new work</a>
+  <%= link_to 'View top media', root_path, class: "btn btn-secondary" %>
+  <%= link_to 'Add a new work', new_work_path, class: "btn btn-primary" %>
 
-  </main>
+</main>
