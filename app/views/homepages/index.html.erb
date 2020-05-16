@@ -1,72 +1,67 @@
 <main>
   <section class="spotlight">
+    <% spotlight = Work.max_votes %>
     <h2 class="spotlight__header">
       <span class="spotlight__header--prefix">Media Spotlight</span>
-      <a class="spotlight__link-to" href="/works/593">Harry Potter and the Sorcerer's Stone</a> by J.K. Rowling
+      <%= link_to spotlight.title, work_path(spotlight.id) %> by <%= spotlight.creator %>
     </h2>
     <p class="spotlight__description">
-      27 votes - An orphaned boy enrolls in a school of wizardry, where he learns the truth about himself, his family and the terrible evil that haunts the magical world.
+      <%= spotlight.votes.count %> votes - <%= spotlight.description %>
     </p>
   </section>
 
-<hr class="root__hr">
-<% top_movies = Work.top_ten(:movie) %>
+  <hr class="root__hr">
 
-<section class="top-ten__container">
-  <section class="top-ten__list-container">
-  <h2 class="top-ten__header">
-    Top Movies
-  </h2>
-  <ul class="list-group top-ten__list">
-    <% top_movies.each do |work| %>
-      <li class="list-group-item">
-        <h4>
-          <%= link_to work.title, work_path(work.id) %>
-          <small class="top-ten__creator">by <%= work.creator %> </small>
-        </h4>
-        <p> <%= work.votes.count%> votes</p>
-      </li>
-    <% end %>
-  </ul>
-  <!-- <a href="/works.movies">View More Movies</a> -->
-</section>
+  <section class="top-ten__container">
+    <section class="top-ten__list-container">
+      <h2 class="top-ten__header">
+        Top Movies
+      </h2>
+      <ul class="list-group top-ten__list">
+        <% Work.top_ten(:movie).each do |work| %>
+          <li class="list-group-item">
+            <h4>
+              <%= link_to work.title, work_path(work.id) %>
+              <small class="top-ten__creator">by <%= work.creator %> </small>
+            </h4>
+            <p> <%= work.votes.count%> votes</p>
+          </li>
+        <% end %>
+      </ul>
+    </section>
 
-  <section class="top-ten__list-container">
-  <h2 class="top-ten__header">
-    Top Books
-  </h2>
-  <ul class="list-group top-ten__list">
-    <% Work.top_ten(:book).each do |work| %>
-      <li class="list-group-item">
-        <h4>
-          <%= link_to work.title, work_path(work.id) %>
-          <small class="top-ten__creator">by <%= work.creator %> </small>
-        </h4>
-        <p> <%= work.votes.count%> votes</p>
-      </li>
-    <% end %>
-  </ul>
-  <!-- <a href="/works.books">View More Books</a> -->
-</section>
+    <section class="top-ten__list-container">
+      <h2 class="top-ten__header">
+        Top Books
+      </h2>
+      <ul class="list-group top-ten__list">
+        <% Work.top_ten(:book).each do |work| %>
+          <li class="list-group-item">
+            <h4>
+              <%= link_to work.title, work_path(work.id) %>
+              <small class="top-ten__creator">by <%= work.creator %> </small>
+            </h4>
+            <p> <%= work.votes.count%> votes</p>
+          </li>
+        <% end %>
+      </ul>
+    </section>
 
-  <section class="top-ten__list-container">
-  <h2 class="top-ten__header">
-    Top Albums
-  </h2>
-  <ul class="list-group top-ten__list">
-    <% Work.top_ten(:album).each do |work| %>
-      <li class="list-group-item">
-        <h4>
-          <%= link_to work.title, work_path(work.id) %>
-          <small class="top-ten__creator">by <%= work.creator %> </small>
-        </h4>
-        <p> <%= work.votes.count%> votes</p>
-      </li>
-    <% end %>
-  </ul>
-  <!-- <a href="/works.albums">View More Albums</a> -->
+    <section class="top-ten__list-container">
+      <h2 class="top-ten__header">
+        Top Albums
+      </h2>
+      <ul class="list-group top-ten__list">
+        <% Work.top_ten(:album).each do |work| %>
+          <li class="list-group-item">
+            <h4>
+              <%= link_to work.title, work_path(work.id) %>
+              <small class="top-ten__creator">by <%= work.creator %> </small>
+            </h4>
+            <p> <%= work.votes.count%> votes</p>
+          </li>
+        <% end %>
+      </ul>
+    </section>
   </section>
-
-</section>
-
 </main>
