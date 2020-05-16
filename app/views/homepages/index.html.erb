@@ -10,6 +10,7 @@
   </section>
 
 <hr class="root__hr">
+<% top_movies = Work.top_ten(:movie) %>
 
 <section class="top-ten__container">
   <section class="top-ten__list-container">
@@ -17,20 +18,15 @@
     Top Movies
   </h2>
   <ul class="list-group top-ten__list">
+    <% top_movies.each do |work| %>
       <li class="list-group-item">
         <h4>
-          <a href="/works/593">Harry Potter and the Sorcerer's Stone</a>
-          <small class="top-ten__creator">by J.K. Rowling</small>
+          <%= link_to work.title, work_path(work.id) %>
+          <small class="top-ten__creator">by <%= work.creator %> </small>
         </h4>
-        <p>27 votes</p>
+        <p> <%= work.votes.count%> votes</p>
       </li>
-      <li class="list-group-item">
-        <h4>
-          <a href="/works/595">volleyball</a>
-          <small class="top-ten__creator">by </small>
-        </h4>
-        <p>5 votes</p>
-      </li>
+    <% end %>
   </ul>
   <!-- <a href="/works.movies">View More Movies</a> -->
 </section>
@@ -40,13 +36,15 @@
     Top Books
   </h2>
   <ul class="list-group top-ten__list">
+    <% Work.top_ten(:book).each do |work| %>
       <li class="list-group-item">
         <h4>
-          <a href="/works/592">Huggy Star</a>
-          <small class="top-ten__creator">by Nigel Lesch DVM -0</small>
+          <%= link_to work.title, work_path(work.id) %>
+          <small class="top-ten__creator">by <%= work.creator %> </small>
         </h4>
-        <p>5 votes</p>
+        <p> <%= work.votes.count%> votes</p>
       </li>
+    <% end %>
   </ul>
   <!-- <a href="/works.books">View More Books</a> -->
 </section>
@@ -56,13 +54,15 @@
     Top Albums
   </h2>
   <ul class="list-group top-ten__list">
+    <% Work.top_ten(:album).each do |work| %>
       <li class="list-group-item">
         <h4>
-          <a href="/works/571">Kreb-Full-o Been ! </a>
-          <small class="top-ten__creator">by Ms. Trevion Buckridge</small>
+          <%= link_to work.title, work_path(work.id) %>
+          <small class="top-ten__creator">by <%= work.creator %> </small>
         </h4>
-        <p>11 votes</p>
+        <p> <%= work.votes.count%> votes</p>
       </li>
+    <% end %>
   </ul>
   <!-- <a href="/works.albums">View More Albums</a> -->
   </section>
