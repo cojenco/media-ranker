@@ -14,9 +14,8 @@
     </section>
   </section>
 
-  <h1>YET TO DO: below</h1>
   <section class="works-votes__container">
-    <h3 class="works-votes__header">3 Votes for this Album</h3>
+    <h3 class="works-votes__header"> <%= @work.votes.count %>  Votes for this <%= @work.category.capitalize %> </h3>
     <table class="table">
       <thead>
         <tr>
@@ -25,14 +24,13 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td><a href="/users/670">lisa</a></td>
-          <td>May 15, 2020</td>
-        </tr>
-        <tr>
-          <td><a href="/users/657">Mr Z</a></td>
-          <td>May 14, 2020</td>
-        </tr>
+        <% @work.votes.all.each do |vote|%>
+          <% user = User.find_by(id: vote.user_id) %>
+          <tr>
+            <td> <%= link_to user.username, user_path(user.id) %> </td>
+            <td> <%= vote.created_at %> </td>
+          </tr>
+        <% end %>
       </tbody>
     </table>
   </section>
