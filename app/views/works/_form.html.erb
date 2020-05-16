@@ -1,4 +1,17 @@
-<section>
+<%if @work.errors.any?%>
+<section class="alert__container">
+  <div class="alert alert-warning">
+    <span>A problem occurred: Could not create album</span>
+      <ul>
+          <%@work.errors.each do |column, message|%>
+            <li> <%=column%>: <%=message%> </li>
+          <%end%>
+      </ul>
+  </div>
+</section>
+<%end%>
+
+<main>
   <%= form_with model: @work do |f| %>
 
     <div class="form-group">
@@ -30,7 +43,7 @@
       <%= f.submit "#{action_name} Work", class: "btn btn-primary" %>
     </div>
   <% end %>
-</section>
+</main>
 
 
 
