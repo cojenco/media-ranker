@@ -1,2 +1,96 @@
-<h1>Works#index</h1>
-<p>Find me in app/views/works/index.html.erb</p>
+
+<h1>All Works</h1>
+
+<ul class="list-group top-ten__list">
+<% @works.each do |work| %>
+    <li class="list-group-item">
+        <h4>
+          <a href="/"> <%= work.title %> </a>
+          <small class="top-ten__creator">by <%= work.creator %> </small>
+        </h4>
+        <p>votes here</p>
+      </li>
+<% end %>
+</ul>
+
+
+<br>
+<br>
+<main>
+    <h2>TEMPLATE:::List of Works</h2>
+
+  <section class="media-table">
+    <h4>Albums</h4>
+    <table class="table">
+      <thead>
+        <tr>
+          <th width="80">Votes</th>
+          <th>Title</th>
+          <th>Created By</th>
+          <th width="100">Published</th>
+          <th width="100">Upvote</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr>
+            <td>10</td>
+            <td><a href="/works/571">Kreb-Full-o Been ! </a></td>
+            <td>Ms. Trevion Buckridge</td>
+            <td>2016</td>
+            <td><a class="btn btn-primary" rel="nofollow" data-method="post" href="/works/571/upvote">Upvote</a></td>
+          </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="media-table">
+    <h4>Books</h4>
+    <table class="table">
+      <thead>
+        <tr>
+          <th width="80">Votes</th>
+          <th>Title</th>
+          <th>Created By</th>
+          <th width="100">Published</th>
+          <th width="100">Upvote</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr>
+            <td>5</td>
+            <td><a href="/works/592">Huggy Star</a></td>
+            <td>Nigel Lesch DVM -0</td>
+            <td>1962</td>
+            <td><a class="btn btn-primary" rel="nofollow" data-method="post" href="/works/592/upvote">Upvote</a></td>
+          </tr>
+      </tbody>
+    </table>
+  </section>
+  <section class="media-table">
+    <h4>Movies</h4>
+    <table class="table">
+      <thead>
+        <tr>
+          <th width="80">Votes</th>
+          <th>Title</th>
+          <th>Created By</th>
+          <th width="100">Published</th>
+          <th width="100">Upvote</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr>
+            <td>27</td>
+            <td><a href="/works/596">your name.</a></td>
+            <td>Makoto Shinkai</td>
+            <td>2016</td>
+            <td><a class="btn btn-primary" rel="nofollow" data-method="post" href="/works/596/upvote">Upvote</a></td>
+          </tr>
+      </tbody>
+    </table>
+  </section>
+
+<a class="btn btn-secondary" href="/">View top media</a>
+<a class="btn btn-primary" href="/works/new">Add a new work</a>
+
+  </main>
