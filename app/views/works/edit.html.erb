@@ -1,2 +1,7 @@
-<h1>Works#edit</h1>
-<p>Find me in app/views/works/edit.html.erb</p>
+<main>
+
+  <h2>Edit this <%= @work.category %> </h2>
+  
+  <%= render partial: "form", locals: { action_name: "Update" } %>
+
+</main>
