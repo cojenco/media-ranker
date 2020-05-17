@@ -4,6 +4,9 @@ describe Work do
 
   before do
     @work = Work.new(title: "Casablanca")
+    @goblin = users(:goblin)
+    @babyshark = users(:babyshark)
+    @admin = users(:admin)
   end
 
   describe "validations" do
@@ -31,12 +34,6 @@ describe Work do
   end 
 
   describe "relations" do
-    before do
-      @goblin = users(:goblin)
-      @babyshark = users(:babyshark)
-      @admin = users(:admin)
-    end
-
     it "can have many votes" do
       @work.save!
       Vote.create!(work_id: @work.id, user_id: @goblin.id)
@@ -63,4 +60,32 @@ describe Work do
       end
     end
   end
+
+  describe "custom methods" do
+    describe "top_ten" do
+      it "returns an array of Works that have the top ten votes in each category" do
+        top_movies = Work.top_ten(:movie)
+        expect(top_movies).must_be_instance_of Array
+
+        top_movies.each do |work|
+          expect(work).must_be_instance_of Work
+        end
+      end
+    end
+
+    describe "max_votes" do
+      it "returns one Work instance" do
+        expect(Work.max_votes).must_be_instance_of Work
+      end
+
+      it "returns the Work that has the most votes" do
+        @work.save!
+        Vote.create!(work_id: @work.id, user_id: @goblin.id)
+        Vote.create!(work_id: @work.id, user_id: @babyshark.id)
+
+        expect(Work.max_votes).must_equal @work
+        expect(Work.max_votes.votes.count).must_equal 2
+      end
+    end
+  end 
 end
