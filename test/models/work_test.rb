@@ -1,7 +1,6 @@
 require "test_helper"
 
 describe Work do
-
   before do
     @work = Work.new(title: "Casablanca")
     @goblin = users(:goblin)
@@ -18,12 +17,16 @@ describe Work do
       invalid_work = works(:toystory)
       invalid_work.title = nil
       expect(invalid_work.valid?).must_equal false
+      expect(invalid_work.errors.messages).must_include :title
+      expect(invalid_work.errors.messages[:title]).must_equal ["can't be blank"]
     end
 
     it "is invalid with a non-unique title in the same category" do
       @work.title = "Toy Story"
       @work.category = :movie
       expect(@work.valid?).must_equal false
+      expect(@work.errors.messages).must_include :title
+      expect(@work.errors.messages[:title]).must_equal ["has already been taken"]
     end
 
     it "is valid with a non-unique title in a different category" do
@@ -74,15 +77,12 @@ describe Work do
     end
 
     describe "max_votes" do
-      it "returns one Work instance" do
-        expect(Work.max_votes).must_be_instance_of Work
-      end
-
-      it "returns the Work that has the most votes" do
+      it "returns one Work that has the most votes" do
         @work.save!
         Vote.create!(work_id: @work.id, user_id: @goblin.id)
         Vote.create!(work_id: @work.id, user_id: @babyshark.id)
 
+        expect(Work.max_votes).must_be_instance_of Work
         expect(Work.max_votes).must_equal @work
         expect(Work.max_votes.votes.count).must_equal 2
       end
