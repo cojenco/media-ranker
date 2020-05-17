@@ -1,7 +1,7 @@
 <main>
     
   <h2>User Summary: <%= link_to @user.username, user_path(@user.id) %> </h2>
-  <p>Joined site  <%= @user.created_at %> </p>
+  <p>Joined site  <%= @user.created_at.strftime("%b %d, %Y") %> </p>
 
   <section class="user-votes__container">
     <h3 class="user-votes__header">Votes</h3>
@@ -23,7 +23,7 @@
             <td> <%= work.creator %> </td>
             <td> <%= work.publication_year %> </td>
             <td> <%= work.category %> </td>
-            <td> <%= vote.created_at %> </td>
+            <td> <%= vote.created_at.strftime("%b %d, %Y") %> </td>
           </tr>
           <% end %>
       </tbody>
