@@ -1,7 +1,7 @@
 <%if @work.errors.any?%>
 <section class="alert__container">
   <div class="alert alert-warning">
-    <span>A problem occurred: Could not create album</span>
+    <span>A problem occurred: Could not create <%= @work.category %> </span>
       <ul>
           <%@work.errors.each do |column, message|%>
             <li> <%=column%>: <%=message%> </li>
