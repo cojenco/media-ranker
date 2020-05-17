@@ -1,0 +1,18 @@
+toystory:
+  title: Toy Story
+  category: movie
+  creator: Pixar
+  publication_year: 1995
+  description: Just in case you were also wondering what happened to all the toys that went missing when you were a kid.
+prince:
+  title: The Little Prince
+  category: book
+  creator: Antoine de Saint-Exupery
+  publication_year: 1943
+  description: A philosophical poetic tale. A journey.
+thriller:
+  title: Thriller
+  category: album
+  creator: Michael Jackson
+  publication_year: 1982
+  description: Every song was a killer.
