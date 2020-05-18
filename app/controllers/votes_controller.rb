@@ -4,7 +4,7 @@ class VotesController < ApplicationController
     user = User.find_by(id: session[:user_id])
     if user.nil?
       flash[:warning] = "A problem occurred: You must log in to do that"
-      redirect_back(fallback_location: root_path)
+      redirect_back(fallback_location: root_path)   #https://api.rubyonrails.org/classes/ActionController/Redirecting.html
       return
     end
 
