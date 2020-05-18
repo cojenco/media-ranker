@@ -7,41 +7,50 @@
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <link href="https://fonts.googleapis.com/css2?family=Gudea:wght@400;700&display=swap" rel="stylesheet">
   </head>
 
   <body>
     <header class="app-header__header">
-    <h1>
-      <a href="/">Media Ranker</a>
-      <small>Ranking the Best of Everything</small>
-    </h1>
+      <h1>
+        <a href="/">Media Ranker</a>
+        <small>Ranking the Best of Everything</small>
+      </h1>
 
-    <nav class="app-header__nav">
-      <ul class="nav app-header__site-nav-container">
-        <li class="nav-item app-header__nav_item">
-          <a class="nav-link" href="/">View top media</a>
-        </li>
-        <li class="nav-item app-header__nav_item">
-          <a class="nav-link" href="/works">View all media</a>
-        </li>
-        <li class="nav-item app-header__nav_item">
-          <a class="nav-link" href="/works/new">Add a new work</a>
-        </li>
-        <li class="nav-item app-header__nav_item">
-          <a class="nav-link" href="/users">View all users</a>
-        </li>
-      </ul>
-      <ul class="nav app-header__user-nav-container">
+      <nav class="app-header__nav">
+        <ul class="nav app-header__site-nav-container">
+          <li class="nav-item app-header__nav_item">
+            <a class="nav-link" href="/">View top media</a>
+          </li>
+          <li class="nav-item app-header__nav_item">
+            <a class="nav-link" href="/works">View all media</a>
+          </li>
+          <li class="nav-item app-header__nav_item">
+            <a class="nav-link" href="/works/new">Add a new work</a>
+          </li>
+          <li class="nav-item app-header__nav_item">
+            <a class="nav-link" href="/users">View all users</a>
+          </li>
+        </ul>
 
-        <li class="nav-item app-header__nav_item">
-          <a class="btn btn-primary" href="/users/631">Logged in as cojenco</a>
-        </li>
-        <li class="nav-item app-header__nav_item">
-          <a class="btn btn-primary" rel="nofollow" data-method="post" href="/logout">Log Out</a>
-        </li>
-      </ul>
-    </nav>
-  </header>
+        <ul class="nav app-header__user-nav-container">
+          <% if session[:user_id] %>
+            <% user = User.find_by(id: session[:user_id]) %>
+            <li class="nav-item app-header__nav_item">
+              <%= link_to "Logged in as #{user.username}", user_path(user.id), class: "btn btn-primary" %>
+            </li>
+            <li class="nav-item app-header__nav_item">
+              <%= link_to 'Log Out', logout_path, method: :post, class: "btn btn-primary" %>
+            </li>
+          <% else %>
+            <li class="nav-item app-header__nav_item">
+              <%= link_to 'Log In', login_path, class: "btn btn-primary" %>
+            </li>
+          <% end %>
+        </ul>
+      </nav>
+    </header>
 
     <section class="alert__container">
       <% flash.each do |name, message| %>
