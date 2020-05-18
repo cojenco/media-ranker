@@ -16,7 +16,7 @@
 
     <div class="form-group">
       <%= f.label :category %>
-      <%= f.select :category, options_for_select(["album","book","movie"]), class: "form-control" %>
+      <%= f.select :category, options_for_select(["album","book","movie"], @work.category),{} ,class: "form-control" %>
     </div>
 
     <div class="form-group">
@@ -44,14 +44,3 @@
     </div>
   <% end %>
 </main>
-
-
-
-    <h2>Working on Select</h2>
-    <div class="form-group">
-      <label>Category</label>
-      <select class="form-control" name="work[category]">
-      <option value="album">album</option>
-      <option value="book">book</option>
-      <option value="movie">movie</option></select>
-    </div>
