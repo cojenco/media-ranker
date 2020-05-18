@@ -9,7 +9,6 @@
       <%= link_to 'Back to media ranks', root_path, class: "btn btn-primary" %>
       <%= link_to 'Edit', edit_work_path(@work.id), class: "btn btn-primary" %>
       <%= link_to 'Upvote', work_upvote_path(@work.id), method: :post, class: "btn btn-primary" %>
-      <a class="btn btn-primary" rel="nofollow" data-method="post" href="/works/583/upvote">Upvote YET!</a>
       <%= link_to 'Delete', work_path(@work.id), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger" %>
     </section>
   </section>
@@ -28,7 +27,7 @@
           <% user = User.find_by(id: vote.user_id) %>
           <tr>
             <td> <%= link_to user.username, user_path(user.id) %> </td>
-            <td> <%= vote.created_at %> </td>
+            <td> <%= vote.created_at.strftime("%b %d, %Y") %> </td>
           </tr>
         <% end %>
       </tbody>
