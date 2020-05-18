@@ -27,7 +27,6 @@ class WorksController < ApplicationController
       redirect_to work_path(@work.id)
       return
     else
-      flash.now[:error] = "Ooops! Could not create new work."
       render :new, status: :bad_request
       return
     end
