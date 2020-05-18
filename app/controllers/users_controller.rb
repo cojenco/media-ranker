@@ -26,7 +26,7 @@ class UsersController < ApplicationController
       session[:user_id] = user.id
       flash[:success] = "Successfully logged in as existing user #{user.username}"
     else          #new user
-      user.create(username: params[:user][:username])
+      user = User.create(username: params[:user][:username])
       session[:user_id] = user.id
       flash[:success] = "Successfully created new user #{user.username} with ID #{user.id}"
     end
