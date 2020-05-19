@@ -35,6 +35,11 @@ main {
   padding: 2rem;
 }
 
+footer {
+  text-align: center;
+  color: #26A69A;
+}
+
 h1, h2, h3, h4 {
   font-weight: bold;
 }
@@ -45,6 +50,12 @@ a, h2, h3 {
 
 a:hover {
   text-decoration: none;
+  color: #FF5722;
+}
+
+.btn:hover {
+  background-color: #FF5722;
+  border-color: #FF5722;
 }
 
 ul {
