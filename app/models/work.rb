@@ -1,5 +1,6 @@
 class Work < ApplicationRecord
-  has_many :votes
+  # https://guides.rubyonrails.org/association_basics.html
+  has_many :votes, dependent: :destroy
   has_many :users, through: :votes
 
   validates :title, presence: true
