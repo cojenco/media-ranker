@@ -37,9 +37,24 @@ class UsersController < ApplicationController
 
 
   def logout
-    session[:user_id] = nil
-    flash[:success] = "Successfully logged out"
-    redirect_to root_path
-    return
+    if !session[:user_id]             #in cases where no user is in session
+      flash[:warning] = "A problem occured: You must be logged in to logout"
+      redirect_to root_path
+      return
+    end
+
+    # in cases where user is in session
+    user = User.find_by(id: session[:user_id])
+    if user
+      session[:user_id] = nil
+      flash[:success] = "Successfully logged out"
+      redirect_to root_path
+      return
+    else
+      session[:user_id] = nil
+      flash[:warning] = "A problem occured: Unknown user"
+      redirect_to root_path
+      return
+    end
   end
 end
