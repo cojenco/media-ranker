@@ -12,4 +12,8 @@ class Work < ApplicationRecord
   def self.max_votes
     return Work.all.max_by {|work| work.votes.count}
   end
+
+  def self.category_sort(category)
+    return Work.where(category: category).sort_by{|work| -work.votes.count}
+  end
 end
