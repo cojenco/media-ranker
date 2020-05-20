@@ -1,21 +1,15 @@
 class VotesController < ApplicationController
+
+  before_action :require_login, only: [:create]     #in cases where no user logged in
   
   def create
-    user = User.find_by(id: session[:user_id])
-    # in cases where no user is in session
-    if user.nil?
-      flash[:warning] = "A problem occurred: You must log in to do that"
-      redirect_back(fallback_location: root_path)   #https://api.rubyonrails.org/classes/ActionController/Redirecting.html
-      return
-    end
-
-    # in cases where user is login in session
+    # in cases where user is login in session 
     upvote_work_id = params[:work_id]
-    vote = Vote.new(work_id: upvote_work_id, user_id: user.id)
-    # invalid vote 
-    if !vote.valid?
+    vote = Vote.new(work_id: upvote_work_id, user_id: @current_user.id)  #@current_user passed in by before_action
+    
+    if !vote.valid?                                 #invalid vote
       flash[:warning] = "A problem occurred: Could not upvote. User has already voted for this work"
-      redirect_back(fallback_location: root_path)
+      redirect_back(fallback_location: root_path)   #https://api.rubyonrails.org/classes/ActionController/Redirecting.html
       return
     end
 
