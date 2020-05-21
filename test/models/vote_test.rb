@@ -3,39 +3,30 @@ require "test_helper"
 describe Vote do
   before do
     @goblin = users(:goblin)
-    @babyshark = users(:babyshark)
     @admin = users(:admin)
-    @prince = works(:prince)
-    @vote = Vote.new(work_id: @prince.id, user_id: @admin.id )
+    @starwars = works(:starwars)
+    @nemo = works(:nemo)
+    @vote = Vote.new(work_id: @nemo.id, user_id: @goblin.id)
   end
 
   describe "validations" do
     it "is valid when the user_id and work_id combination is unique" do
       expect(@vote.valid?).must_equal true
+
+      vote1 = Vote.new(work_id: @nemo.id, user_id: @admin.id)        #same work_id
+      expect(vote1.valid?).must_equal true
+
+      vote3 = Vote.new(work_id: @starwars.id, user_id: @goblin.id)   #same user_id
+      expect(vote3.valid?).must_equal true
     end
 
-    it "is invalid without a title" do
-      # invalid_work = works(:toystory)
-      # invalid_work.title = nil
-      # expect(invalid_work.valid?).must_equal false
-      # expect(invalid_work.errors.messages).must_include :title
-      # expect(invalid_work.errors.messages[:title]).must_equal ["can't be blank"]
-    end
+    it "is invalid when the user_id and work_id combination is not unique" do
+      @vote.save!
+      vote2 = Vote.new(work_id: @nemo.id, user_id: @goblin.id)
 
-    it "is invalid with a non-unique title in the same category" do
-      # @work.title = "Toy Story"
-      # @work.category = :movie
-      # expect(@work.valid?).must_equal false
-      # expect(@work.errors.messages).must_include :title
-      # expect(@work.errors.messages[:title]).must_equal ["has already been taken"]
-    end
-
-    it "is valid with a non-unique title in a different category" do
-      # adaptation = works(:prince)  # fixture: category is book
-      # adaptation.category = :movie
-      # expect(adaptation.valid?).must_equal true
+      expect(vote2.valid?).must_equal false
+      expect(vote2.errors.messages).must_include :work_id
+      expect(vote2.errors.messages[:work_id]).must_equal ["has already been taken"]
     end
   end 
-
-
 end
