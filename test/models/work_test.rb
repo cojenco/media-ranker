@@ -69,22 +69,27 @@ describe Work do
       it "returns an array of Works that have the top ten votes in each category" do
         top_movies = Work.top_ten(:movie)
         expect(top_movies).must_be_instance_of Array
+        expect(top_movies.size).must_equal 10
 
         top_movies.each do |work|
           expect(work).must_be_instance_of Work
         end
+
+        # from the fixture setting, max vote is movie Toy Story
+        top_work = works(:toystory)
+        top_votes = top_work.votes.count
+        expect(top_movies.first).must_equal top_work
       end
     end
 
     describe "max_votes" do
       it "returns one Work that has the most votes" do
-        @work.save!
-        Vote.create!(work_id: @work.id, user_id: @goblin.id)
-        Vote.create!(work_id: @work.id, user_id: @babyshark.id)
-
+        # from the fixture setting, max vote is movie Toy Story
+        top_work = works(:toystory)
+        top_votes = top_work.votes.count
         expect(Work.max_votes).must_be_instance_of Work
-        expect(Work.max_votes).must_equal @work
-        expect(Work.max_votes.votes.count).must_equal 2
+        expect(Work.max_votes).must_equal top_work
+        expect(Work.max_votes.votes.count).must_equal top_votes
       end
     end
   end 
