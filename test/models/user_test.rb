@@ -55,5 +55,16 @@ describe User do
         expect(voted_work).must_be_instance_of Work
       end
     end
+
+    it "is associated with votes and works so when a work is destroyed the vote count will decrease" do
+      @user.save!
+      Vote.create!(work_id: @toystory.id, user_id: @user.id)
+      Vote.create!(work_id: @thriller.id, user_id: @user.id)
+      expect(@user.votes.count).must_equal 2
+
+      expect {
+        @thriller.destroy
+      }.must_differ "@user.votes.count", -1
+    end
   end
 end

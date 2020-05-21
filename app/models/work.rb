@@ -1,5 +1,5 @@
 class Work < ApplicationRecord
-  # https://guides.rubyonrails.org/association_basics.html
+  # https://guides.rubyonrails.org/association_basics.html #Lee taught me this!!!
   has_many :votes, dependent: :destroy
   has_many :users, through: :votes
 
