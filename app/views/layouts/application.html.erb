@@ -53,13 +53,15 @@
       </nav>
     </header>
 
-    <section class="alert__container">
-      <% flash.each do |name, message| %>
-        <div class="alert alert-<%= name %>">
-        <span>  <%= message %> </span>
-        </div>
-      <% end %>
-    </section>
+    <% if !flash.empty? %>
+      <section class="alert__container">
+        <% flash.each do |name, message| %>
+          <div class="alert alert-<%= name %>">
+          <span>  <%= message %> </span>
+          </div>
+        <% end %>
+      </section>
+    <% end %>
 
     <%= yield %>
 
