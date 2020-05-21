@@ -1,0 +1,30 @@
+vote1:
+  user: goblin
+  work: toystory
+vote2:
+  user: goblin
+  work: prince
+vote3:
+  user: goblin
+  work: thriller
+vote4:
+  user: babyshark
+  work: prince
+vote5:
+  user: admin
+  work: thriller
+vote6:
+  user: babyshark
+  work: toystory
+vote7:
+  user: admin
+  work: toystory
+vote8:
+  user: admin
+  work: up
+vote9:
+  user: goblin
+  work: shrek
+vote10:
+  user: babyshark
+  work: mermaid
