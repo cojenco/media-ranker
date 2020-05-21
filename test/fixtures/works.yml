@@ -16,3 +16,36 @@ thriller:
   creator: Michael Jackson
   publication_year: 1982
   description: Every song was a killer.
+starwars:
+  title: Star Wars
+  category: movie
+startrek:
+  title: Star Trek
+  category: movie
+mermaid:
+  title: The Little Mermaid
+  category: movie
+lionking:
+  title: Lion King
+  category: movie
+bambi:
+  title: Bambi
+  category: movie
+pets:
+  title: Pets
+  category: movie
+shrek:
+  title: Shrek
+  category: movie
+cars:
+  title: Cars
+  category: movie
+incredibles:
+  title: The Incredibles
+  category: movie
+nemo:
+  title: Finding Nemo
+  category: movie
+up:
+  title: Up
+  category: movie
