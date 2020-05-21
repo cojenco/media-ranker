@@ -74,11 +74,14 @@ describe Work do
         top_movies.each do |work|
           expect(work).must_be_instance_of Work
         end
+      end
 
+      it "returns the top ten works in descending fashion with the first work to have most votes" do
         # from the fixture setting, max vote is movie Toy Story
         top_work = works(:toystory)
         top_votes = top_work.votes.count
-        expect(top_movies.first).must_equal top_work
+        expect(Work.top_ten(:movie).first).must_equal top_work
+        expect(Work.top_ten(:movie).first.votes.count).must_equal top_votes
       end
     end
 
@@ -90,6 +93,35 @@ describe Work do
         expect(Work.max_votes).must_be_instance_of Work
         expect(Work.max_votes).must_equal top_work
         expect(Work.max_votes.votes.count).must_equal top_votes
+      end
+    end
+
+    describe "category sort" do
+      it "returns an array with the same quantity of works within the category" do
+        total_movies = Work.where(category: :movie).count
+        expect(Work.category_sort(:movie).size).must_equal total_movies
+        total_books = Work.where(category: :book).count
+        expect(Work.category_sort(:book).size).must_equal total_books
+        total_albums = Work.where(category: :album).count
+        expect(Work.category_sort(:album).size).must_equal total_albums
+
+        Work.category_sort(:movie).each do |work|
+          expect(work).must_be_instance_of Work
+        end
+      end
+
+      it "sorts each category by votes count (desc) so the first work to have most votes" do
+        # from the fixture setting, max vote movie is movie Toy Story
+        top_movie = works(:toystory)
+        movie_votes = top_movie.votes.count
+        expect(Work.category_sort(:movie).first).must_equal top_movie
+        expect(Work.category_sort(:movie).first.votes.count).must_equal movie_votes
+        
+        # from the fixture setting, max vote book is The Little Prince
+        top_book = works(:prince)
+        book_votes = top_book.votes.count
+        expect(Work.category_sort(:book).first).must_equal top_book
+        expect(Work.category_sort(:book).first.votes.count).must_equal book_votes
       end
     end
   end 
