@@ -6,10 +6,11 @@ class WorksController < ApplicationController
     @works = Work.all
   end
 
-  
+
   def show
     if @work.nil?
-      head :not_found
+      flash[:warning] = "Media ID #{params[:id]} is no longer available"
+      redirect_to root_path
       return
     end
   end
