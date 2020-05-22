@@ -94,6 +94,25 @@ describe Work do
         expect(Work.top_ten(:movie).first).must_equal top_work
         expect(Work.top_ten(:movie).first.votes.count).must_equal top_votes
       end
+
+      it "returns an array of all works if there are less than 10 works in a category" do
+        total_books = Work.where(category: :book).count
+        top_books = Work.top_ten(:book)
+        expect(top_books).must_be_instance_of Array
+        expect(top_books.size).must_equal total_books
+
+        top_books.each do |work|
+          expect(work).must_be_instance_of Work
+        end
+      end
+
+      it "returns an empty array if there are no works in a category" do
+        @thriller = works(:thriller)
+        @thriller.destroy
+        top_albums = Work.top_ten(:album)
+        expect(top_albums).must_be_instance_of Array
+        expect(top_albums.size).must_equal 0
+      end
     end
 
     describe "max_votes" do
@@ -104,6 +123,12 @@ describe Work do
         expect(Work.max_votes).must_be_instance_of Work
         expect(Work.max_votes).must_equal top_work
         expect(Work.max_votes.votes.count).must_equal top_votes
+      end
+
+      it "returns nil when there are no works in database" do
+        Work.destroy_all
+        expect(Work.count).must_equal 0
+        expect(Work.max_votes).must_be_nil
       end
     end
 
