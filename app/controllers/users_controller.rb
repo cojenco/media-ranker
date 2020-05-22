@@ -22,17 +22,17 @@ class UsersController < ApplicationController
 
 
   def login 
-    @user = User.find_by(username: params[:user][:username])
+    @user = User.find_by(user_params)
 
     if @user.nil?       
-      @user = User.new(username: params[:user][:username])
-      if @user.save     #new user and valid
+      @user = User.new(user_params)
+      if @user.save                  #new user and valid
         flash[:success] = "Successfully created new user #{@user.username} with ID #{@user.id}"
-      else              #new user with invalid username
+      else                           #new user with invalid username (blank username)
         render :login_form, status: :bad_request
         return
       end
-    else                #existing user
+    else                             #existing user
       flash[:success] = "Successfully logged in as existing user #{@user.username}"
     end
 
@@ -58,6 +58,10 @@ class UsersController < ApplicationController
   end
 
   private
+
+  def user_params
+    return params.require(:user).permit(:username)
+  end
 
   #would come handy in the future when more routes and controller actions are created
   def find_user   
